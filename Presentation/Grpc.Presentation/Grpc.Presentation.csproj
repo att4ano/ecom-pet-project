@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <IncludeHttpRuleProtos>true</IncludeHttpRuleProtos>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="AutoMapper" Version="13.0.1" />
+        <PackageReference Include="FluentValidation" Version="11.9.1" />
+        <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.9.1" />
+        <PackageReference Include="Google.Api.CommonProtos" Version="2.15.0" />
+        <PackageReference Include="Google.Protobuf" Version="3.27.0-rc1" />
+        <PackageReference Include="Grpc.AspNetCore" Version="2.57.0" />
+        <PackageReference Include="Grpc.AspNetCore.Server" Version="2.57.0" />
+        <PackageReference Include="Grpc.AspNetCore.Server.Reflection" Version="2.57.0" />
+        <PackageReference Include="Grpc.Core" Version="2.46.6" />
+        <PackageReference Include="Grpc.Core.Api" Version="2.57.0" />
+        <PackageReference Include="Grpc.Tools" Version="2.58.0">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.AspNetCore.Grpc.Swagger" Version="0.8.5" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Protobuf Include="Proto\*.proto"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Application\Application\Application.csproj" />
+      <ProjectReference Include="..\..\Application\Contracts\Contracts.csproj" />
+      <ProjectReference Include="..\..\Infrastructure\DataAccess\DataAccess.csproj" />
+    </ItemGroup>
+    
+</Project>

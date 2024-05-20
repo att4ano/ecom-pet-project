@@ -1,0 +1,50 @@
+syntax="proto3";
+
+import "google/protobuf/wrappers.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+
+package order_item_grpc;
+
+service OrderItemGrpcService {
+  rpc GetAllItems (ItemFilter) returns (GetAllItemsResponse);
+  rpc GetItemById (GetItemByIdRequest) returns (OrderItemResponse);
+  rpc AddNewItem (AddNewItemRequest) returns (google.protobuf.Empty);
+  rpc UpdateItemAmount (UpdateItemAmountRequest) returns (google.protobuf.Empty);
+  rpc DeleteItemById (DeleteItemByIdRequest) returns (google.protobuf.Empty);
+}
+
+message OrderItemResponse {
+  string itemId = 1;
+  string productId = 2;
+  string orderId = 3;
+  int32 amount = 4;
+}
+
+message ItemFilter {
+  google.protobuf.StringValue productId = 1;
+  google.protobuf.StringValue categoryId = 2;
+}
+
+message GetAllItemsResponse {
+  repeated OrderItemResponse items = 1;
+}
+
+message GetItemByIdRequest {
+  string itemId = 1;
+}
+
+message AddNewItemRequest {
+  string orderId = 1;
+  string productId = 2;
+  int32 amount = 3;
+}
+
+message UpdateItemAmountRequest {
+  string itemId = 1;
+  int32 amount = 2;
+}
+
+message DeleteItemByIdRequest {
+  string itemId = 1;
+}

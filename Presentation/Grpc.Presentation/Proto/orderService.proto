@@ -1,0 +1,46 @@
+syntax="proto3";
+
+import "google/protobuf/wrappers.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+
+package order_grpc;
+
+service OrderGrpcService {
+  rpc GetOrderList (OrderFilter) returns (GetOrderListResponse);
+  rpc GetOrderById (GetOrderByIdRequest) returns (OrderResponse);
+  rpc CreateOrder (CreateOrderRequest) returns (google.protobuf.Empty);
+  rpc CancelOrder (ChangeStatusOrderRequest) returns (google.protobuf.Empty);
+  rpc CompleteOrder (ChangeStatusOrderRequest) returns (google.protobuf.Empty);
+}
+
+message OrderResponse {
+  string address = 1;
+  google.protobuf.StringValue description = 2;
+  string creationData = 3;
+  string status = 4;
+  repeated string items = 5;
+}
+
+message OrderFilter {
+  google.protobuf.StringValue creationData = 1;
+  google.protobuf.StringValue status = 2;
+}
+
+message GetOrderListResponse {
+  repeated OrderResponse order = 1;
+}
+
+message GetOrderByIdRequest {
+  string orderId = 1;
+}
+
+message CreateOrderRequest {
+  map<string, int32> items = 1;
+  string address = 2;
+  string description = 3;
+}
+
+message ChangeStatusOrderRequest {
+  string orderId = 1;
+}

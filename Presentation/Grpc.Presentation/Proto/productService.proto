@@ -1,0 +1,62 @@
+syntax="proto3";
+
+import "google/protobuf/wrappers.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+
+package product_grpc;
+
+service ProductGrpcService {
+  rpc GetProductList (ProductFilter) returns (GetProductListResponse);
+  rpc GetProductById (GetProductByIdRequest) returns (ProductResponse);
+  rpc CreateProduct (CreateProductRequest) returns (google.protobuf.Empty);
+  rpc CreateProductCategory (CreateProductCategoryRequest) returns (google.protobuf.Empty);
+  rpc UpdateProductPrice (UpdateProductPriceRequest) returns (google.protobuf.Empty);
+  rpc DeleteProduct (DeleteProductRequest) returns (google.protobuf.Empty);
+}
+
+message Decimal {
+  int32 units = 1;
+  int32 nanos = 2;
+}
+
+message ProductResponse {
+  string productId = 1;
+  string name = 2;
+  string categoryId = 3;
+  Decimal price = 4;
+  string description = 5;
+}
+
+message ProductFilter {
+  google.protobuf.StringValue categoryId = 1;
+  google.protobuf.Int64Value price = 2;
+}
+
+message GetProductListResponse {
+  repeated ProductResponse product = 1; 
+}
+
+message GetProductByIdRequest {
+  string productId = 1;
+}
+
+message CreateProductRequest {
+  string name = 1;
+  string categoryId = 2;
+  Decimal price = 3;
+  google.protobuf.StringValue description = 4;
+}
+
+message CreateProductCategoryRequest {
+  string name = 1;
+}
+
+message UpdateProductPriceRequest {
+  string productId = 1;
+  Decimal price = 2;
+}
+
+message DeleteProductRequest {
+  string productId = 1;
+}
